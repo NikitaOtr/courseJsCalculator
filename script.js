@@ -1,8 +1,8 @@
-const money = prompt('Ваш месячный доход');
+const mission = 1000000;
 const income = 'freelance';
+const money = prompt('Ваш месячный доход');
 const addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
 const deposit = confirm('Есть ли у вас депозит в банке?');
-const mission = 1000000;
 
 const expenses1 = prompt('Введите обязательную статью расходов');
 const amount1 = prompt('Во сколько это обойдется?');
