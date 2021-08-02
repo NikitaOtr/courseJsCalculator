@@ -11,9 +11,7 @@ const amount2 = prompt('Во сколько это обойдется?');
 
 const budgetMonth = money - amount1 - amount2;
 const budgetDay = Math.floor(budgetMonth / 30);
-
 let period = Math.ceil(mission / budgetMonth);
-
 
 console.log('money: ', typeof money);
 console.log('income: ', typeof income);
