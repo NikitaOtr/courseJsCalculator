@@ -5,7 +5,7 @@ const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
 const getUserNumber = function(message) {
     let value = prompt(message).trim();
     while(!isNumber(value)) {
-        value = prompt(message);
+        value = prompt(message).trim();
     }
     return +value;
 };
@@ -15,7 +15,7 @@ const isString = str => !!str.match(/\D/);
 const getUserString = function (message) {
     let value = prompt(message).trim();
     while(!isString(value)) {
-        value = prompt(message);
+        value = prompt(message).trim();
     }
     return value;
 };
