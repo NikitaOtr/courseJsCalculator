@@ -1,17 +1,28 @@
 'use strict';
+
 const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
 
-const getUserNum = function(message) {
-    let money = prompt(message);
-    while(!isNumber(money)) {
-        money = prompt(message);
+const getUserNumber = function(message) {
+    let value = prompt(message).trim();
+    while(!isNumber(value)) {
+        value = prompt(message);
     }
-    return +money;
+    return +value;
+};
+
+const isString = str => !!str.match(/\D/);
+
+const getUserString = function (message) {
+    let value = prompt(message).trim();
+    while(!isString(value)) {
+        value = prompt(message);
+    }
+    return value;
 };
 
 let appData = {
-    income: {},
     budget: 0,
+    income: {},
     budgetDay: 0,
     budgetMonth: 0,
     addIncome: [],
@@ -21,21 +32,39 @@ let appData = {
     addExpenses: [],
     
     deposit: false,
+    depositPercent: 0,
+    depositMoney: 0,
+
     mission: 500000,
     period: 12,
 
     asking () {
-        this.budget = getUserNum('Введите ваш ежемесячный доход');
+        this.budget = getUserNumber('Введите ваш ежемесячный доход');
 
-        const addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+        if (confirm('Есть ли у вас дополнительный заработок?')) {
+            let itemIncome = getUserString('Какой у вас есть дополнительный заработок?');
+            let cashIncome = getUserNumber('Сколько в месяц зарабатываёте на этом?');
+            this.income[itemIncome] = cashIncome;
+
+        }
+
+        const addExpenses = getUserString('Перечислите возможные расходы за рассчитываемый период через запятую');
         this.addExpenses = addExpenses.trim().toLowerCase().split(',');
         this.addExpenses = this.addExpenses.map(item => item.trim());
 
         this.deposit = confirm('Есть ли у вас депозит в банке?');
+        this.getInfoDeposit();
 
         for (let i = 0; i < 2; i++) {
-            const name = prompt('Введите обязательную статью расходов');
-            this.expenses[name.trim()] = getUserNum('Во сколько это обойдется?');
+            const name = getUserString('Введите обязательную статью расходов');
+            this.expenses[name.trim()] = getUserNumber('Во сколько это обойдется?');
+        }
+    },
+
+    getInfoDeposit() {
+        if (this.deposit) {
+            this.depositPercent = getUserNumber('Какой годовой процент ?');
+            this.depositMoney = getUserNumber('Какая сумма заложена ?');
         }
     },
 
@@ -52,6 +81,10 @@ let appData = {
 
     getTargetMonth () {
         this.period = Math.ceil(this.mission / this.budgetMonth);
+    },
+
+    calcSaveeMoney () {
+        return this.budgetMonth * this.period; 
     },
 
     getSatusIncome () {
@@ -77,8 +110,9 @@ console.log('Расходы: ', appData.expensesMonth);
 console.log('Период: ', appData.period);
 console.log('Уровень дохода: ', appData.getSatusIncome());
 
-console.log('');
-console.log('Наша программа велючает в себя данные:');
-for(let item in appData) {
-    console.log(item, appData[item]);
-}
+console.log('income: ', appData.income);
+console.log('deposit: ', appData.deposit);
+console.log('depositPercent: ', appData.depositPercent);
+console.log('depositMoney: ', appData.depositMoney);
+
+console.log(appData.addExpenses.map(item => item[0].toUpperCase() + item.slice(1).toLowerCase()).join(', '));
