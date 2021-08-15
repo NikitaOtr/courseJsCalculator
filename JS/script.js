@@ -56,7 +56,7 @@ const buttonCancel = document.querySelector('#cancel');
 
 
 
-let appData = {
+const appData = {
     budget: 0,
     budgetMonth: 0,
     budgetDay: 0,
