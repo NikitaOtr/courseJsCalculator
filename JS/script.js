@@ -9,9 +9,9 @@ function onliRussianLeter() {
 const salaryAmount = document.querySelector('.salary-amount');
 salaryAmount.oninput = onliNumber;
 
-const [IncomeTitle, IncomeValue] = document.querySelectorAll('.income-items input');
-IncomeTitle.oninput = onliRussianLeter;
-IncomeValue.oninput = onliNumber;
+const [incomeTitle, incomeValue] = document.querySelectorAll('.income-items input');
+incomeTitle.oninput = onliRussianLeter;
+incomeValue.oninput = onliNumber;
 let incomeItems = document.getElementsByClassName('income-items');
 const buttonPlusIncome = document.querySelector('.income_add');
 
