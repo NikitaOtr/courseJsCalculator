@@ -54,7 +54,7 @@ const resDataTarget = document.querySelector('.target_month-value');
 const buttonStart = document.querySelector('#start');
 const buttonCancel = document.querySelector('#cancel');
 
-class AppData1 {
+class AppData {
     constructor() {
         this.budget = 0;
         this.budgetMonth = 0;
@@ -311,5 +311,5 @@ class AppData1 {
     }
 }
 
-const appData = new AppData1();
+const appData = new AppData();
 appData.eventListeners();
